@@ -7,10 +7,12 @@ basePairTrans = str.maketrans(basePair)
 
 
 def rcDNA(seq):
+    """Return the reverse complement of the given DNA sequence."""
     return seq.translate(basePairTrans)[::-1]
 
 
 def cDNA(seq):
+    """Return the complement of the given DNA sequence."""
     return seq.translate(basePairTrans)
 
 
@@ -29,6 +31,7 @@ def pad_dict_list(item_list, length):
 
 
 def export_figure(fig, title, data_directory, experiment, metadata={}):
+    """Export a figure tagged with metadata."""
     fig_metadata = {"Comment": "experiment:" + experiment}
     fig_metadata.update(metadata)
     filename = data_directory + experiment + "_" + title + ".png"
@@ -64,10 +67,12 @@ def sequence_to_regex(seq, group=True, name=None):
 
 
 def common_sequence(seqs):
-    # Return a string representing the common sequence of a list of sequences.
-    # Letters in the returned string are either A, C, T or G
-    # if the letter in that position is the same in all sequences,
-    # or N if not.  Sequences must be the same length.
+    """Return a string representing the common sequence of a list of sequences.
+
+    Letters in the returned string are either A, C, T or G if the letter
+    in that position is the same in all sequences, or N if not.
+    Sequences must be the same length.
+    """
 
     def elements_equal(element_list):
         if all([x == element_list[0] for x in element_list]):
@@ -81,6 +86,7 @@ def common_sequence(seqs):
 
 
 def hamming_distance(s1, s2):
+    """Compute the Hamming distance between two sequences."""
     if len(s1) != len(s2):
         raise ValueError("hamming_distance: string arguments must have the same length")
     return [s1[i] != s2[i] for i in range(len(s1))]
